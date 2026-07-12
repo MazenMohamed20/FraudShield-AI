@@ -1,0 +1,7 @@
+Decision Tree Results
+========================================
+Accuracy : 0.9905
+Precision: 0.1273
+Recall   : 0.8000
+F1 Score : 0.2197
+ROC AUC  : 0.8808

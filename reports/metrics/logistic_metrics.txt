@@ -1,0 +1,7 @@
+Logistic Regression Results
+========================================
+Accuracy : 0.9915
+Precision: 0.1481
+Recall   : 0.8526
+F1 Score : 0.2523
+ROC AUC  : 0.9626

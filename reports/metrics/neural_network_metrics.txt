@@ -1,0 +1,7 @@
+Neural Network Results
+========================================
+Accuracy : 0.9993
+Precision: 0.7957
+Recall   : 0.7789
+F1 Score : 0.7872
+ROC AUC  : 0.9432
