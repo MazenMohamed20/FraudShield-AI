@@ -4,6 +4,7 @@ import os
 import joblib
 import pandas as pd
 import plotly.graph_objects as go
+from huggingface_hub import hf_hub_download
  
 # ============================================================
 # PAGE CONFIGURATION
@@ -257,19 +258,31 @@ hr{ border-color:var(--border) !important; }
 # LOAD MODEL & SCALER
 # ============================================================
  
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MODELS_DIR = os.path.join(BASE_DIR, "models")
-MODEL_PATH = os.path.join(MODELS_DIR, "random_forest.pkl")
-SCALER_PATH = os.path.join(MODELS_DIR, "robust_scaler.pkl")
- 
-model = None
-scaler = None
- 
-if os.path.exists(MODEL_PATH):
+# ============================================================
+# LOAD MODEL FROM HUGGING FACE
+# ============================================================
+
+REPO_ID = "MazenMohamed10/FraudShield-AI-Model"
+
+try:
+    MODEL_PATH = hf_hub_download(
+        repo_id=REPO_ID,
+        filename="random_forest.pkl"
+    )
+
+    SCALER_PATH = hf_hub_download(
+        repo_id=REPO_ID,
+        filename="robust_scaler.pkl"
+    )
+
     model = joblib.load(MODEL_PATH)
- 
-if os.path.exists(SCALER_PATH):
     scaler = joblib.load(SCALER_PATH)
+
+except Exception as e:
+    st.error(f"Failed to load model from Hugging Face\n\n{e}")
+    st.stop()
+
+system_armed = True
  
 system_armed = model is not None and scaler is not None
  
